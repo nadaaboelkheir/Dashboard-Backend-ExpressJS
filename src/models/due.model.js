@@ -12,26 +12,27 @@ const DueSchema = new mongoose.Schema(
     },
     DueTo: {
       type: Date,
-      required: [true, "Due to is required"],
+      required: [true, "Due date is required"],
       validate: {
         validator: function (value) {
           return value > Date.now();
         },
         message: "Due date should be in the future.",
       },
-      courseName: {
-        type: String,
-        required: [true, "Course name is required"],
-      },
-      dueType: {
-        type: String,
-        required: [true, "Due type is required"],
-        enum: ["Assignment", "Quiz"],
-      },
+    },
+    courseName: {
+      type: String,
+      required: [true, "Course name is required"],
+    },
+    dueType: {
+      type: String,
+      required: [true, "Due type is required"],
+      enum: ["Assignment", "Quiz"],
     },
   },
   {
     timestamps: true,
   }
 );
+
 module.exports = mongoose.model("Due", DueSchema);

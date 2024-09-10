@@ -17,13 +17,13 @@ exports.createDueValidator = [
     .trim()
     .isString()
     .withMessage("title should be string "),
-  check("DueTo")
-    .notEmpty()
-    .withMessage("DueTo is required")
-    .bail()
-    .trim()
-    .isDate()
-    .withMessage("DueTo should be date"),
+//   check("DueTo")
+//     .notEmpty()
+//     .withMessage("DueTo is required")
+//     .bail()
+//     .trim()
+//     .isDate()
+//     .withMessage("DueTo should be date"),
   check("courseName")
     .notEmpty()
     .withMessage("courseName is required")

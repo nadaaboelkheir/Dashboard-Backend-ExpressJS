@@ -10,7 +10,14 @@ exports.createAnnouncementValidator = [
     .isString()
     .withMessage("title should be string ")
     .isLength({ min: 3 })
-    .withMessage("Color name must not be less than 3 characters"),
+    .withMessage("title must not be less than 3 characters"),
+    // check("subject ")
+    // .notEmpty()
+    // .withMessage("subject is required")
+    // .bail()
+    // .trim()
+    // .isString()
+    // .withMessage("subject should be string "),
   check("content")
     .notEmpty()
     .withMessage("content is required")
@@ -18,13 +25,7 @@ exports.createAnnouncementValidator = [
     .trim()
     .isString()
     .withMessage("content should be string "),
-  check("subject ")
-    .notEmpty()
-    .withMessage("subject is required")
-    .bail()
-    .trim()
-    .isString()
-    .withMessage("subject should be string "),
+
 
   validatorMiddleware,
 ];
