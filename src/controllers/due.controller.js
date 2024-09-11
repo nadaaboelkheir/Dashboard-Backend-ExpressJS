@@ -1,6 +1,6 @@
 const AsyncHandler = require("express-async-handler");
 const DueModel = require("../models/due.model");
-
+const { MAX_LIMIT } = require("../configs/env");
 exports.createDue = AsyncHandler(async (req, res) => {
   const { title, topic, DueTo, courseName, dueType } = req.body;
   const due = await DueModel.create({
@@ -10,13 +10,16 @@ exports.createDue = AsyncHandler(async (req, res) => {
     courseName,
     dueType,
   });
-  return res.status(200).json({ msg: "success", due: due });
+  return res.status(200).json({ msg: "due added successfully", due: due });
 });
 
 exports.getAllDues = AsyncHandler(async (req, res) => {
-  const dues = await DueModel.find();
+  const limit =
+    parseInt(req.query.limit, 10) || parseInt(MAX_LIMIT, 10) || 2;
+
+  const dues = await DueModel.find().limit(limit);
   if (dues.length > 0) {
-    return res.status(200).json({ msg: "success", dues: dues });
+    return res.status(200).json({ dues: dues });
   } else {
     return res.status(200).json({ msg: "No dues found" });
   }
@@ -56,5 +59,5 @@ exports.getDueById = AsyncHandler(async (req, res) => {
   if (!due) {
     return res.status(404).json({ msg: " due Not Found" });
   }
-  return res.status(200).json({ msg: "success", due: due });
+  return res.status(200).json({ due: due });
 });
